@@ -25,4 +25,8 @@ export class CheckoutPage {
   }
   async finishCheckout() { await this.finishButton.click(); }
   async validateOrderComplete() { await expect(this.completeHeader).toContainText('Thank you for your order!'); }
+  async validateErrorMessage(message: string) { 
+    const errorMessage = this.page.locator('[data-test="error"]');
+    await expect(errorMessage).toContainText(message);
+  }
 }

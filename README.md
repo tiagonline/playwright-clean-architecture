@@ -1,4 +1,5 @@
 # ✈️ playwright-on-flight
+
 **Projeto de Automação E2E para Avaliação Técnica - Onfly**
 
 **Candidato:** Tiago Silva
@@ -18,10 +19,12 @@ Este projeto foi construído em **Playwright (TypeScript)**, escolhido por sua e
 ## 2. Requisitos & Execução
 
 ### Pré-requisitos
-* Node.js (v18+)
-* Playwright Browsers (instalado via `npm init playwright`)
+
+- Node.js (v18+)
+- Playwright Browsers (instalado via `npm init playwright`)
 
 ### Execução
+
 1.  Clone o repositório.
 2.  Instale as dependências: `npm install`
 3.  Execute o teste (Headless): `npx playwright test`
@@ -33,6 +36,6 @@ Este projeto foi construído em **Playwright (TypeScript)**, escolhido por sua e
 
 Para levar este projeto para um ambiente de produção Onfly, os próximos passos seriam:
 
-1.  **Integração com Xray/Jira:** Integrar o relatório de testes para que os cenários sejam visíveis no painel de gestão de testes da equipe ( o Xray é usado na Onfly).
+1.  **Integração com Xray/Jira:** Integrar o relatório de testes para que os cenários sejam visíveis no painel de gestão de testes da equipe ( percebi que o Xray é usado na Onfly).
 2.  **Mocks & Fixtures:** Migrar os dados de Login e Checkout para o arquivo de Fixtures do Playwright para maior segurança e reuso de dados.
 3.  **API Testing:** Adicionar o módulo de testes de API (Backend) no mesmo pipeline para garantir a qualidade de ponta a ponta (mesmo com a API ServeRest fora do ar, o design do teste já estaria pronto).
