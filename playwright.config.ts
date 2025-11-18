@@ -24,21 +24,28 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-use: {
-    headless: true, 
+  use: {
+    headless: true,
     baseURL: 'https://www.saucedemo.com/',
     trace: 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
   projects: [
-{
+    {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        launchOptions: {
+          args: [
+            '--disable-gpu',
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+          ],
+        },
       },
     },
-
+    
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
