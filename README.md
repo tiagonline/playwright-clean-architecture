@@ -1,6 +1,6 @@
 # ✈️ playwright-on-flight
 
-[![Playwright Tests (CI/CD)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/playwright.yml/badge.svg)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/playwright.yml)
+[![Playwright Tests (CI/CD)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/e2e-tests.yml)
 [![API Tests (Postman/Newman)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/api-tests.yml/badge.svg)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/api-tests.yml)
 
 **Projeto de Automação Full Stack (Web & API) para Avaliação Técnica - Onfly**
