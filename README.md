@@ -2,6 +2,8 @@
 
 **Projeto de Automação E2E para Avaliação Técnica - Onfly**
 
+![Playwright Tests](https://github.com/tiagonline/playwright-on-flight/actions/workflows/playwright.yml/badge.svg)
+
 **Candidato:** Tiago Silva
 
 **Objetivo:** Atender a solicitação do desafio técnico: **Definir casos de testes e criar a automação E2E (Ponta a Ponta) para um fluxo de compras de e-commerce utilizando Playwright** (sem finalizar a compra).
