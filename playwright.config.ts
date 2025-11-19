@@ -21,7 +21,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        // Pra funcionar no WSL
+        // Pra funcionar no WSL do Windows
         launchOptions: {
           args: ['--disable-gpu', '--no-sandbox', '--disable-setuid-sandbox'],
         },
