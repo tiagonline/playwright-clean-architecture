@@ -9,7 +9,7 @@
 
 ---
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 Teste técnico e estruturei um plano de automação E2E em **Playwright + TypeScript**.
 
@@ -18,7 +18,7 @@ Teste técnico e estruturei um plano de automação E2E em **Playwright + TypeSc
 
 ---
 
-## 💡 Decisões de Arquitetura
+## Decisões de Arquitetura
 
 1. **Page Object Model (POM):** Separação total entre a lógica do teste e os seletores da página, facilitando a manutenção.  
 2. **BDD Style:** Uso de `test.step` para criar relatórios que funcionam como **documentação viva** dos cenários.  
@@ -29,16 +29,16 @@ Teste técnico e estruturei um plano de automação E2E em **Playwright + TypeSc
 
 ---
 
-## 💻 Como Executar
+## Como Executar
 
-### 🧩 Pré-requisitos
+### Pré-requisitos
 
 - Node.js (v18+)
 - Playwright Browsers (instalado via `npm init playwright`)
 
 ---
 
-### 1️⃣ Instalação
+### 1. Instalação
 
 Clone o repositório e instale as dependências:
 
@@ -51,17 +51,17 @@ npx playwright install --with-deps
 
 ---
 
-### 2️⃣ Rodar Testes Web (Playwright)
+### 2. Rodar Testes Web (Playwright)
 
 Para validar o fluxo E2E de Checkout:
 
-#### ▶️ Executar testes (Headless)
+#### ▶ Executar testes (Headless)
 
 ```bash
 npx playwright test
 ```
 
-#### 📊 Visualizar relatório (Trace Viewer)
+#### Visualizar relatório (Trace Viewer)
 
 ```bash
 npx playwright show-report
@@ -69,21 +69,21 @@ npx playwright show-report
 
 ---
 
-### 3️⃣ Rodar Testes de API (Newman)
-
+### 3. Rodar Testes de API (Newman)
 Para validar o CRUD de Usuários (GoRest):
 
-> **Nota:** É necessário ter o newman instalado ou usar via `npx`.
-
-#### ▶️ Executar via npx (sem instalação global)
+> **Nota:** O token de autenticação não é versionado por segurança. Você deve fornecer seu próprio Token Bearer (GoRest) via linha de comando.
 
 ```bash
-npx newman run tests/api/GoRest_CRUD.postman_collection.json   -e tests/api/GoRest_Env.postman_environment.json   --reporters cli,htmlextra
+# Executar via npx injetando o token
+npx newman run tests/api/GoRest_CRUD.postman_collection.json \
+-e tests/api/GoRest_Env.postman_environment.json \
+--env-var "token=SEU_TOKEN_AQUI" \
+--reporters cli,htmlextra
 ```
-
 ---
 
-## ✅ Próximos Passos (Visão de Futuro)
+## Próximos Passos (Visão de Futuro)
 
 Para evoluir este projeto em um ambiente de produção na Onfly, minha estratégia seria:
 
