@@ -1,15 +1,23 @@
 {
-  "name": "playwright-on-flight",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": ["playwright", "e2e", "BDD"],
   "author": "Tiago Silva",
-  "license": "ISC",
-  "type": "commonjs",
+  "description": "",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.10.1"
-  }
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "playwright-on-flight",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:api": "newman run tests/api/GoRest_CRUD.postman_collection.json -e tests/api/GoRest_Env.postman_environment.json --reporters cli"
+  },
+  "keywords": [
+    "playwright",
+    "e2e",
+    "BDD"
+  ],
+  "type": "commonjs",
+  "version": "1.0.0"
 }

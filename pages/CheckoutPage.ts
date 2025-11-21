@@ -1,4 +1,5 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+
 export class CheckoutPage {
   readonly page: Page;
   readonly firstNameInput: Locator;
@@ -7,6 +8,7 @@ export class CheckoutPage {
   readonly continueButton: Locator;
   readonly finishButton: Locator;
   readonly completeHeader: Locator;
+  readonly errorMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -16,17 +18,25 @@ export class CheckoutPage {
     this.continueButton = page.locator('[data-test="continue"]');
     this.finishButton = page.locator('[data-test="finish"]');
     this.completeHeader = page.locator('[data-test="complete-header"]');
+    this.errorMessage = page.locator('[data-test="error"]');
   }
+
   async fillInformation(firstName: string, lastName: string, zip: string) {
     await this.firstNameInput.fill(firstName);
     await this.lastNameInput.fill(lastName);
     await this.postalCodeInput.fill(zip);
     await this.continueButton.click();
   }
-  async finishCheckout() { await this.finishButton.click(); }
-  async validateOrderComplete() { await expect(this.completeHeader).toContainText('Thank you for your order!'); }
+
+  async finishCheckout() { 
+    await this.finishButton.click(); 
+  }
+
+  async validateOrderComplete() { 
+    await expect(this.completeHeader).toContainText('Thank you for your order!'); 
+  }
+
   async validateErrorMessage(message: string) { 
-    const errorMessage = this.page.locator('[data-test="error"]');
-    await expect(errorMessage).toContainText(message);
+    await expect(this.errorMessage).toContainText(message);
   }
 }

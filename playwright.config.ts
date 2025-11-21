@@ -1,29 +1,29 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: "./tests",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: "html",
 
   use: {
     headless: true,
-    baseURL: 'https://www.saucedemo.com/',
-    video: 'on-first-retry',
-    trace: 'on',
-    screenshot: 'only-on-failure',
+    baseURL: "https://www.saucedemo.com/",
+    video: "on-first-retry",
+    trace: "on",
+    screenshot: "only-on-failure",
   },
 
   projects: [
     {
-      name: 'chromium',
+      name: "chromium",
       use: {
-        ...devices['Desktop Chrome'],
+        ...devices["Desktop Chrome"],
         // Pra funcionar no WSL do Windows
         launchOptions: {
-          args: ['--disable-gpu', '--no-sandbox', '--disable-setuid-sandbox'],
+          args: ["--disable-gpu", "--no-sandbox", "--disable-setuid-sandbox"],
         },
       },
     },

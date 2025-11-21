@@ -1,9 +1,9 @@
-// tests/checkout.spec.ts
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
+import * as data from '../data/fixtures.json';
 
 test.describe('Fluxo de Checkout | Swag Labs', () => {
   let loginPage: LoginPage;
@@ -20,22 +20,19 @@ test.describe('Fluxo de Checkout | Swag Labs', () => {
   });
 
   test('Cenário Negativo - Deve falhar ao tentar logar com senha invalida', async () => {
-    // Valida a Regra de Negócio: Login deve falhar com credenciais inválidas.
-    const errorText = 'Epic sadface: Username and password do not match any user in this service';
-    
     await test.step('Quando: Tenta logar com senha invalida', async () => {
-      await loginPage.login('standard_user', 'senha_errada');
+      // Uso de dados do arquivo JSON
+      await loginPage.login(data.users.invalid.username, data.users.invalid.password);
     });
 
-    await test.step('Então: Deve mostrar mensagem de erro (Usando POM)', async () => {
-      await loginPage.validateErrorMessage(errorText); 
+    await test.step('Então: Deve mostrar mensagem de erro', async () => {
+      await loginPage.validateErrorMessage(data.messages.loginError); 
     });
   });
 
-  test('Cenário E2E Principal - Deve realizar a compra de um item com sucesso', async ({ page }) => {
-    
+  test('Cenário E2E Principal - Deve realizar a compra de um item com sucesso', async () => {
     await test.step('Dado: Que o login é feito com sucesso', async () => {
-      await loginPage.login('standard_user', 'secret_sauce');
+      await loginPage.login(data.users.valid.username, data.users.valid.password);
     });
     
     await test.step('Quando: Adiciono a mochila e prossigo para o checkout', async () => {
@@ -45,7 +42,12 @@ test.describe('Fluxo de Checkout | Swag Labs', () => {
     });
 
     await test.step('E: Preencho os dados de entrega', async () => {
-      await checkoutPage.fillInformation('Tiago', 'Silva', '32000-000');
+      // Dados vindos da fixture
+      await checkoutPage.fillInformation(
+        data.checkout.firstName, 
+        data.checkout.lastName, 
+        data.checkout.postalCode
+      );
     });
 
     await test.step('Então: Finalizo o pedido e vejo a confirmação', async () => {
@@ -55,22 +57,21 @@ test.describe('Fluxo de Checkout | Swag Labs', () => {
   });
 
   test('Cenário Exceção - Deve falhar o checkout com campos de entrega incompletos', async () => {
-    // Valida a Regra de Negócio: Formulário de checkout deve validar campos obrigatórios.
-    
     await test.step('Dado: Que o login é feito com sucesso', async () => {
-      await loginPage.login('standard_user', 'secret_sauce');
+      await loginPage.login(data.users.valid.username, data.users.valid.password);
     });
     
     await test.step('Quando: Adiciono item e tento continuar sem o CEP', async () => {
       await inventoryPage.addBackpackToCart();
       await inventoryPage.goToCart();
       await cartPage.proceedToCheckout();
-      // Simulando dados incompletos
-      await checkoutPage.fillInformation('Tiago', 'Silva', ''); 
+      
+      // Simulando o erro (CEP vazio) mas mantendo Nome/Sobrenome da massa
+      await checkoutPage.fillInformation(data.checkout.firstName, data.checkout.lastName, ''); 
     });
 
-    await test.step('Então: Deve exibir a mensagem de erro "Postal Code is required"', async () => {
-      await checkoutPage.validateErrorMessage('Error: Postal Code is required');
+    await test.step('Então: Deve exibir a mensagem de erro de CEP obrigatório', async () => {
+      await checkoutPage.validateErrorMessage(data.messages.postalCodeError);
     });
   });
 });
