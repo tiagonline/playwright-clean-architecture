@@ -207,13 +207,17 @@
 			}
 		]
 	},
-	"event": [
+"event": [
 		{
 			"listen": "prerequest",
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					""
+					"// Tenta enganar o Firewall simulando ser um Chrome no Windows",
+					"pm.request.headers.add({",
+					"    key: 'User-Agent',",
+					"    value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'",
+					"});"
 				]
 			}
 		},
