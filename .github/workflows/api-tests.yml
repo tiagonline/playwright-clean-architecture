@@ -10,10 +10,10 @@ on:
   workflow_dispatch:
 
   # Roda Automaticamente (Cron Job)
-  schedule:
+  #schedule:
     # Exemplo: Roda todo dia às 09:00 UTC (06:00 da manhã no Brasil)
     # Sintaxe: 'minuto hora dia mês dia_da_semana'
-    - cron: '0 9 * * *'
+    # - cron: '0 9 * * *'
 
 jobs:
   api-tests:
