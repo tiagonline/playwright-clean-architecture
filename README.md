@@ -76,7 +76,6 @@ Para validar o CRUD de Usuários (GoRest):
 > **Nota:** O token de autenticação não é versionado por segurança. Você deve fornecer seu próprio Token Bearer (GoRest) via linha de comando. Por segurança, nas execuções do Github Actions o token foi embedado como secret.
 
 ```bash
-# Executar via npx injetando o token
 npm run test:api -- --env-var "token=SEU_TOKEN_AQUI"
 ```
 **Nota sobre CI/CD da API:** Os testes de API automatizados via Cron Job podem apresentar instabilidade (falso-negativo) devido ao bloqueio de segurança (WAF/Cloudflare) da API pública GoRest contra os IPs dos runners do GitHub Actions, ainda mais que coloquei o monitoramento sintético todo dia as 9h. Em um ambiente real corporativo, isso seria resolvido com Whitelist de IPs.
