@@ -20,14 +20,13 @@ Este teste técnico foi estruturado com foco em **Qualidade de Engenharia, Segur
 
 ## Decisões de Arquitetura
 
-1. **Segurança & Ambiente:** Credenciais injetadas via `process.env` (lidas de um `.env` localmente ou Secrets no CI), garantindo que dados sensíveis nunca sejam versionados (padrão Sênior).
-2. **Page Object Model (POM) Escalável:** Separação total da lógica. Métodos de Page Object (e.g., `addItemToCart(itemName)`) são genéricos, garantindo que o código não precise ser alterado quando novos produtos forem adicionados.
-3. **Maturidade Técnica:** Uso de scripts `lint` e `format` no `package.json` para manter o código limpo e padronizado.
-4. **Full Stack QA:**
-   - **Web (Playwright):** Testes E2E de fluxo crítico (Checkout) com cenários positivos, negativos e de exceção.  
-   - **API (Postman/Newman):** Testes de integração de CRUD com validação de contrato e dados dinâmicos.  
-5. **CI/CD (GitHub Actions):** Pipelines automatizados para Web e API com geração de artefatos (Reports) e segurança de tokens (Secrets).
-6. **Monitoramento Sintético (Cron Job):** Rodar testes de API agendados para criar alertas antecipados de falha antes do cliente perceber.
+1. **Segurança & Ambiente:** Credenciais injetadas via **`process.env`** (lidas de um `.env` localmente ou Secrets no CI), garantindo que dados sensíveis nunca sejam versionados.
+2. **Robustez dos Dados (Data Fuzzing):** Uso da biblioteca **`@faker-js/faker`** para geração **dinâmica** de credenciais (username e password) em testes negativos, aumentando a robustez dos cenários e eliminando a dependência de massas de teste estáticas.
+3. **Page Object Model (POM) Escalável:** Métodos de Page Object (exemplo: `addItemToCart(itemName)`) são **genéricos**, garantindo que o código não precise ser alterado quando novos produtos forem adicionados (máxima escalabilidade).
+4. **Maturidade Técnica (Governança):** Uso de scripts `lint` e `format` no `package.json` para manter o código limpo e padronizado.
+5. **Full Stack QA:** Testes Web (Playwright) e API (Postman/Newman) para uma cobertura completa.
+6. **CI/CD (GitHub Actions):** Pipelines automatizados para Web e API com relatórios e segurança de tokens (Secrets).
+7. **Monitoramento Sintético (Cron Job):** Rodar testes de API agendados para criar alertas antecipados de falha antes do cliente perceber.
 
 ---
 
