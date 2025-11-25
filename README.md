@@ -81,6 +81,8 @@ Nota: O token de autenticação não deve ser versionado. Por segurança, nas ex
 npm run test:api -- --env-var "token=SEU_TOKEN_AQUI"
 ```
 
+**Nota sobre CI/CD da API**: Os testes de API automatizados via Cron Job podem apresentar instabilidade (falso-negativo) devido ao bloqueio de segurança (WAF/Cloudflare) da API pública GoRest contra os IPs dos runners do GitHub Actions, ainda mais que coloquei o monitoramento sintético todo dia as 9h. Em um ambiente real corporativo, isso seria resolvido com Whitelist de IPs.
+
 ---
 ### **Próximos Passos (Visão de Futuro)**
 Para evoluir este projeto em um ambiente de produção:
