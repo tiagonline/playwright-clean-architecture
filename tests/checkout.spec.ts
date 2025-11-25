@@ -24,17 +24,15 @@ test.describe('E2E | Fluxo de Compra SAUCE LABS', () => {
     inventoryPage = new InventoryPage(page);
     cartPage = new CartPage(page);
     checkoutPage = new CheckoutPage(page);
-    // URL Relativa
     await loginPage.goto();
   });
 
   test('Cenário Negativo - Deve falhar ao tentar logar com credenciais inválidas', async () => {
     // Geração dinâmica de dados inválidos
     const invalidPassword = faker.internet.password(); 
-    const invalidUsername = faker.internet.userName(); // NOVO USERNAME DINÂMICO GERADO
+    const invalidUsername = faker.internet.userName();
     
     await test.step('Quando: Tenta logar com credenciais inválidas (geradas dinamicamente)', async () => {
-      // Uso de username e senha 100% dinâmicos
       await loginPage.login(invalidUsername, invalidPassword); 
     });
 
@@ -44,23 +42,24 @@ test.describe('E2E | Fluxo de Compra SAUCE LABS', () => {
   });
 
   test('Cenário E2E Principal - Deve realizar a compra de um item com sucesso', async () => {
+    // DADOS DINÂMICOS: Garante que cada execução use um perfil único
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
+    const postalCode = faker.location.zipCode();
+
     await test.step('Dado: Que o login é feito com sucesso', async () => {
       await loginPage.login(VALID_USERNAME, VALID_PASSWORD);
     });
     
     await test.step('Quando: Adiciono a mochila e prossigo para o checkout', async () => {
-      // Uso do método Page Object genérico (addItemToCart)
       await inventoryPage.addItemToCart('Sauce Labs Backpack');
       await inventoryPage.goToCart();
       await cartPage.proceedToCheckout();
     });
 
-    await test.step('E: Preencho os dados de entrega', async () => {
-      await checkoutPage.fillInformation(
-        data.checkout.firstName, 
-        data.checkout.lastName, 
-        data.checkout.postalCode
-      );
+    await test.step('E: Preencho os dados de entrega dinâmicos', async () => {
+      // Preenchimento com dados gerados pelo faker
+      await checkoutPage.fillInformation(firstName, lastName, postalCode);
     });
 
     await test.step('Então: Finalizo o pedido e vejo a confirmação', async () => {
@@ -75,12 +74,13 @@ test.describe('E2E | Fluxo de Compra SAUCE LABS', () => {
     });
     
     await test.step('Quando: Adiciono item e tento continuar sem o CEP', async () => {
-      // Uso do método Page Object genérico (addItemToCart)
       await inventoryPage.addItemToCart('Sauce Labs Backpack');
       await inventoryPage.goToCart();
       await cartPage.proceedToCheckout();
       
-      // Simulação de erro (CEP vazio)
+      // Simulação de erro (CEP vazio). 
+      // Nota: Aqui usei dados estáticos pois o foco é validar o campo vazio, 
+      // mas poderia usar faker também se preferisse.
       await checkoutPage.fillInformation(data.checkout.firstName, data.checkout.lastName, ''); 
     });
 
