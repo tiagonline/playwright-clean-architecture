@@ -20,8 +20,6 @@ Este teste técnico foi estruturado com foco em **Qualidade de Engenharia, Segur
 
 ## Decisões de Arquitetura
 
-## Decisões de Arquitetura
-
 1. **Segurança & Ambiente (Zero Hardcoding):**
    - Credenciais sensíveis (login válido) são injetadas via **`process.env`**, lidas de um arquivo `.env` (local) ou GitHub Secrets (CI/CD). Nenhum dado sensível é versionado no repositório.
 
