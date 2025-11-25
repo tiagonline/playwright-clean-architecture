@@ -1,14 +1,4 @@
 {
-  "users": {
-    "valid": {
-      "username": "standard_user",
-      "password": "secret_sauce"
-    },
-    "invalid": {
-      "username": "standard_user",
-      "password": "wrong_password"
-    }
-  },
   "checkout": {
     "firstName": "Tiago",
     "lastName": "Silva",
@@ -17,5 +7,11 @@
   "messages": {
     "loginError": "Epic sadface: Username and password do not match any user in this service",
     "postalCodeError": "Error: Postal Code is required"
+  },
+  "users": {
+    "invalid": {
+      "username": "standard_user",
+      "password": "wrong_password"
+    }
   }
 }

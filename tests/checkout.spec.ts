@@ -4,12 +4,19 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import * as data from '../data/fixtures.json';
+// Importa o dotenv para carregar .env localmente se não estiver no CI
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 test.describe('Fluxo de Checkout | Swag Labs', () => {
   let loginPage: LoginPage;
   let inventoryPage: InventoryPage;
   let cartPage: CartPage;
   let checkoutPage: CheckoutPage;
+
+  // Credenciais via variáveis de ambiente para segurança
+  const VALID_USERNAME = process.env.SAUCE_USERNAME || 'standard_user';
+  const VALID_PASSWORD = process.env.SAUCE_PASSWORD || 'secret_sauce';
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
@@ -21,7 +28,7 @@ test.describe('Fluxo de Checkout | Swag Labs', () => {
 
   test('Cenário Negativo - Deve falhar ao tentar logar com senha invalida', async () => {
     await test.step('Quando: Tenta logar com senha invalida', async () => {
-      // Uso de dados do arquivo JSON
+      // Uso de credenciais inválidas da fixture
       await loginPage.login(data.users.invalid.username, data.users.invalid.password);
     });
 
@@ -32,17 +39,17 @@ test.describe('Fluxo de Checkout | Swag Labs', () => {
 
   test('Cenário E2E Principal - Deve realizar a compra de um item com sucesso', async () => {
     await test.step('Dado: Que o login é feito com sucesso', async () => {
-      await loginPage.login(data.users.valid.username, data.users.valid.password);
+      await loginPage.login(VALID_USERNAME, VALID_PASSWORD);
     });
     
     await test.step('Quando: Adiciono a mochila e prossigo para o checkout', async () => {
-      await inventoryPage.addBackpackToCart();
+      // Uso do método genérico (addItemToCart)
+      await inventoryPage.addItemToCart('Sauce Labs Backpack');
       await inventoryPage.goToCart();
       await cartPage.proceedToCheckout();
     });
 
     await test.step('E: Preencho os dados de entrega', async () => {
-      // Dados vindos da fixture
       await checkoutPage.fillInformation(
         data.checkout.firstName, 
         data.checkout.lastName, 
@@ -58,15 +65,16 @@ test.describe('Fluxo de Checkout | Swag Labs', () => {
 
   test('Cenário Exceção - Deve falhar o checkout com campos de entrega incompletos', async () => {
     await test.step('Dado: Que o login é feito com sucesso', async () => {
-      await loginPage.login(data.users.valid.username, data.users.valid.password);
+      await loginPage.login(VALID_USERNAME, VALID_PASSWORD);
     });
     
     await test.step('Quando: Adiciono item e tento continuar sem o CEP', async () => {
-      await inventoryPage.addBackpackToCart();
+      // Uso do método genérico (addItemToCart)
+      await inventoryPage.addItemToCart('Sauce Labs Backpack');
       await inventoryPage.goToCart();
       await cartPage.proceedToCheckout();
       
-      // Simulando o erro (CEP vazio) mas mantendo Nome/Sobrenome da massa
+      // Simulação de erro (CEP vazio)
       await checkoutPage.fillInformation(data.checkout.firstName, data.checkout.lastName, ''); 
     });
 
