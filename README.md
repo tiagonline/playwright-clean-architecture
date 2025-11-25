@@ -50,7 +50,6 @@ Clone o repositório e instale as dependências:
 git clone [https://github.com/tiagonline/playwright-on-flight.git](https://github.com/tiagonline/playwright-on-flight.git)
 cd playwright-on-flight
 npm install
-npx playwright install --with-deps
 ```
 
 ### 2. Governança de Código

@@ -4,11 +4,12 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import * as data from '../data/fixtures.json';
-// Importa o dotenv para carregar .env localmente se não estiver no CI
 import * as dotenv from 'dotenv';
+import { faker } from '@faker-js/faker';
+
 dotenv.config();
 
-test.describe('Fluxo de Checkout | Swag Labs', () => {
+test.describe('E2E | Fluxo de Compra SAUCE LABS', () => { 
   let loginPage: LoginPage;
   let inventoryPage: InventoryPage;
   let cartPage: CartPage;
@@ -23,13 +24,18 @@ test.describe('Fluxo de Checkout | Swag Labs', () => {
     inventoryPage = new InventoryPage(page);
     cartPage = new CartPage(page);
     checkoutPage = new CheckoutPage(page);
+    // URL Relativa
     await loginPage.goto();
   });
 
-  test('Cenário Negativo - Deve falhar ao tentar logar com senha invalida', async () => {
-    await test.step('Quando: Tenta logar com senha invalida', async () => {
-      // Uso de credenciais inválidas da fixture
-      await loginPage.login(data.users.invalid.username, data.users.invalid.password);
+  test('Cenário Negativo - Deve falhar ao tentar logar com credenciais inválidas', async () => {
+    // Geração dinâmica de dados inválidos
+    const invalidPassword = faker.internet.password(); 
+    const invalidUsername = faker.internet.userName(); // NOVO USERNAME DINÂMICO GERADO
+    
+    await test.step('Quando: Tenta logar com credenciais inválidas (geradas dinamicamente)', async () => {
+      // Uso de username e senha 100% dinâmicos
+      await loginPage.login(invalidUsername, invalidPassword); 
     });
 
     await test.step('Então: Deve mostrar mensagem de erro', async () => {
@@ -43,7 +49,7 @@ test.describe('Fluxo de Checkout | Swag Labs', () => {
     });
     
     await test.step('Quando: Adiciono a mochila e prossigo para o checkout', async () => {
-      // Uso do método genérico (addItemToCart)
+      // Uso do método Page Object genérico (addItemToCart)
       await inventoryPage.addItemToCart('Sauce Labs Backpack');
       await inventoryPage.goToCart();
       await cartPage.proceedToCheckout();
@@ -69,7 +75,7 @@ test.describe('Fluxo de Checkout | Swag Labs', () => {
     });
     
     await test.step('Quando: Adiciono item e tento continuar sem o CEP', async () => {
-      // Uso do método genérico (addItemToCart)
+      // Uso do método Page Object genérico (addItemToCart)
       await inventoryPage.addItemToCart('Sauce Labs Backpack');
       await inventoryPage.goToCart();
       await cartPage.proceedToCheckout();
