@@ -1,7 +1,7 @@
 # playwright-clean-architecture
 
-[![Playwright Tests (CI/CD)](https://github.com/tiagonline/playwright-clean-architecture-poc/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/tiagonline/playwright-clean-architecture-poc/actions/workflows/e2e-tests.yml)
-[![API Tests (Postman/Newman)](https://github.com/tiagonline/playwright-clean-architecture-poc/actions/workflows/api-tests.yml/badge.svg)](https://github.com/tiagonline/playwright-clean-architecture-poc/actions/workflows/api-tests.yml)
+[![Playwright Tests (CI/CD)]([https://github.com/tiagonline/playwright-clean-architecture-poc]([https://github.com/tiagonline/playwright-clean-architecture)](https://github.com/tiagonline/playwright-clean-architecture)/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/tiagonline/playwright-clean-architecture-poc/actions/workflows/e2e-tests.yml)
+[![API Tests (Postman/Newman)]([https://github.com/tiagonline/playwright-clean-architecture-poc](https://github.com/tiagonline/playwright-clean-architecture)/actions/workflows/api-tests.yml/badge.svg)]([https://github.com/tiagonline/playwright-clean-architecture-poc](https://github.com/tiagonline/playwright-clean-architecture)/actions/workflows/api-tests.yml)
 
 **Proof of Concept (POC) demonstrando uma arquitetura escalável... utilizando o SwagLabs (E-commerce) como sandbox para simular fluxos transacionais complexos análogos aos desafios de aplicada a um cenário de E-commerce.**
 
