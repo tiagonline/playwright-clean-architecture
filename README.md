@@ -1,9 +1,9 @@
-# ✈️ playwright-on-flight
+# playwright-clean-architecture
 
 [![Playwright Tests (CI/CD)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/e2e-tests.yml)
 [![API Tests (Postman/Newman)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/api-tests.yml/badge.svg)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/api-tests.yml)
 
-**Projeto de Automação Full Stack (Web & API) para Avaliação Técnica - Nível Sênior**
+**Proof of Concept (POC) demonstrando uma arquitetura escalável de automação (Web & API) utilizando Playwright e TypeScript, aplicada a um cenário de Travel Tech.**
 
 ---
 
